@@ -1,10 +1,10 @@
 import os
 
 # 필터링할 대상 디렉터리를 입력합니다.
-target_dir = r"/volume2/mac"
+target_dir = r"/volume2/downloads"
 
 # 필터링 키워드가 입력돼 있는 파일 경로를 입력합니다.
-filter_list = r"/volume1/homes/jihunx/filter/filterlist.txt"
+filter_list = r"/volume2/homes/jihunx/filter/filterlist.txt"
 
 
 # 필터링 키워드 파일을 리스트로 만든다.
@@ -41,10 +41,13 @@ def filtering():
         # 기존 경로와 변경된 이름을 새로운 변수에 저장한다.
         new_name = os.path.join(path, file)
         # 원래 파일 이름과 변경된 이름이 같지 않을 경우 파일명을 변경한다.
-        if item != new_name:
-            os.rename(r"%s" % item, r"%s" % new_name)
-            print("[File renamed] {} ===> {}".format(item, new_name))
-        continue
+        try:
+            if item != new_name and len(file) > 0:
+                os.rename(r"%s" % item, r"%s" % new_name)
+                print("[File renamed] {} ===> {}".format(item, new_name))
+            continue
+        except:
+            pass
 
 
 get_string(filter_list)
